@@ -15,4 +15,4 @@ WORKDIR /app
 RUN wget -O jenkins.war http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable/$JENKINS_VERSION/jenkins.war
 
 ENV JENKINS_HOME=/var/jenkins_home
-ENTRYPOINT ["java", "-jar", "/app/jenkins.war"]
+ENTRYPOINT ["java", "-Dhudson.model.DirectoryBrowserSupport.CSP=", "-jar", "/app/jenkins.war"]
