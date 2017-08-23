@@ -9,7 +9,6 @@ docker run \
 	-p 50000:50000 \
 	-e "TEST_HOME=/home/lev/tmp/jenkins/home/workspace/test-1-1" \
 	-v /home/lev/tmp/jenkins/home:/var/jenkins_home \
-	-v /home/lev/projects/SB:/project \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(which docker):/usr/bin/docker \
 	--privileged=true \
