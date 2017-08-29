@@ -7,10 +7,10 @@ docker run \
 	--name myjenkins \
 	-p 8080:8080 \
 	-p 50000:50000 \
-	-e "TEST_HOME=/home/lev/tmp/jenkins/home/workspace/test-1-1" \
+	-e "TEST_HOME=/home/lev/tmp/jenkins/home/workspace/test-1-2" \
 	-v /home/lev/tmp/jenkins/home:/var/jenkins_home \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(which docker):/usr/bin/docker \
 	--privileged=true \
-	docker-jenkins
+	ozlevka/jenkins:170823-16.58
 

@@ -3,7 +3,7 @@ FROM openjdk:8-jdk
 ENV JENKINS_VERSION=2.60.3
 
 RUN apt-get update \
-    && apt-get install -y sudo make wget curl libltdl7 \
+    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
     && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
     && apt-get install -y nodejs \
     && npm install -g n \
