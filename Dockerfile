@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
  
-ENV JENKINS_VERSION=2.60.3
+ENV JENKINS_VERSION=2.73.1
 
 RUN apt-get update \
     && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
