@@ -1,13 +1,15 @@
-FROM openjdk:8-jdk
+FROM rappdw/docker-java-python
  
-ENV JENKINS_VERSION=2.107.3
+ENV JENKINS_VERSION=2.138.1
 
 RUN apt-get update \
     && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
     && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
     && apt-get install -y nodejs \
     && npm install -g n \
-    && n 6.9.5 
+    && n 6.9.5
+
+RUN pip install ansible==2.5.0
 
 
 WORKDIR /app

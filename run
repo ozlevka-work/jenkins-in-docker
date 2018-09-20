@@ -4,7 +4,7 @@
 
 docker run \
 	--rm \
-	--name myjenkins \
+	--name jenkins \
 	-p 8080:8080 \
 	-p 50000:50000 \
 	-v /home/ozlevka/tmp/jenkins-home:/var/jenkins_home \
