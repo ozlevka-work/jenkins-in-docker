@@ -1,6 +1,6 @@
 FROM rappdw/docker-java-python
  
-ENV JENKINS_VERSION=2.138.1
+ENV JENKINS_VERSION=2.138.2
 
 RUN apt-get update \
     && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
