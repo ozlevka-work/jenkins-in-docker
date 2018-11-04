@@ -3,7 +3,7 @@ FROM rappdw/docker-java-python
 ENV JENKINS_VERSION=2.138.1
 
 RUN apt-get update \
-    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
+    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime sshpass \
     && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
     && apt-get install -y nodejs \
     && npm install -g n \
