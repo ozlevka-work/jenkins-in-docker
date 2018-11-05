@@ -9,7 +9,7 @@ RUN apt-get update \
     && npm install -g n \
     && n 6.9.5
 
-RUN pip install ansible==2.5.0
+RUN pip install ansible==2.5.0 boto
 
 
 WORKDIR /app
