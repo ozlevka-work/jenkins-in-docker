@@ -16,4 +16,5 @@ docker run \
 	-v /home/ozlevka/mydocs/levsconnect.pem:/playbooks/levsconnect.pem \
 	--privileged=true \
 	ozlevka/jenkins:latest
+# latest 181107-17.08
 
