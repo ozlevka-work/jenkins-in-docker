@@ -10,6 +10,10 @@ docker run \
 	-v /home/ozlevka/jenkins-home:/var/jenkins_home \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(which docker):/usr/bin/docker \
+	-v /home/ozlevka/projects/playbooks:/playbooks \
+	-v /home/ozlevka/projects/playbooks/ansible.cfg:/etc/ansible/ansible.cfg \
+	-v /home/ozlevka/.aws:/root/.aws \
+	-v /home/ozlevka/mydocs/levsconnect.pem:/playbooks/levsconnect.pem \
 	--privileged=true \
 	ozlevka/jenkins:latest
 
