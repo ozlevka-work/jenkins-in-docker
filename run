@@ -15,6 +15,6 @@ docker run \
 	-v /home/ozlevka/.aws:/root/.aws \
 	-v /home/ozlevka/mydocs/levsconnect.pem:/playbooks/levsconnect.pem \
 	--privileged=true \
-	ozlevka/jenkins:latest
+	ozlevka/jenkins-ansible:latest
 # latest 181107-17.08
 
