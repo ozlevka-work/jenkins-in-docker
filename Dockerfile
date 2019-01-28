@@ -8,9 +8,10 @@ RUN apt-get update \
 RUN pip install ansible==2.7.5 boto
 
 
+
 WORKDIR /app
 
-RUN wget -O jenkins.war http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/$JENKINS_VERSION/jenkins.war
+RUN wget -O jenkins.war http://mirrors.jenkins.io/war-stable/$JENKINS_VERSION/jenkins.war
 
 ENV JENKINS_HOME=/var/jenkins_home
 ENTRYPOINT ["java", "-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dmail.smtp.starttls.enable=true", "-jar", "/app/jenkins.war"]
