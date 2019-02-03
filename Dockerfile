@@ -8,7 +8,7 @@ RUN apt-get update \
     && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
     && apt-get install -y nodejs gettext-base \
     && npm install -g n \
-    && n 6.9.5 
+    && n 8.9.1 
 
 
 WORKDIR /app
