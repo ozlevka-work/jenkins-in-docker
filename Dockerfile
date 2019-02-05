@@ -20,7 +20,7 @@ RUN wget -O jenkins.war http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/$JENKIN
     && tar xf linux-amd64-github-release.tar.bz2 && rm -f linux-amd64-github-release.tar.bz2 \
     && wget -O /app/helm.tar.gz "https://storage.googleapis.com/kubernetes-helm/helm-$HELM_VERSION-linux-amd64.tar.gz" \
     && tar xfzv helm.tar.gz && mv /app/linux-amd64/helm /usr/local/bin && rm -rf helm.tar.gz linux-amd64 \
-    && helm init -c
+    && helm init -c && helm plugin install https://github.com/chartmuseum/helm-push
 
 
 ENV JENKINS_HOME=/var/jenkins_home
