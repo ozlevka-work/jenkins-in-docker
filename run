@@ -13,5 +13,5 @@ docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(which docker):/usr/bin/docker \
 	--privileged=true \
-	ozlevka/jenkins:latest
+	ozlevka/jenkins:190206-15.40
 
