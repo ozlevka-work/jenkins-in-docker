@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk
  
 ENV JENKINS_VERSION=2.150.1
-ENV GITHUB_RELEASE_VERSION="v0.7.2"
+ENV GITHUB_VERSION="2.11.2"
 
 RUN apt-get update \
     && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
@@ -15,8 +15,11 @@ WORKDIR /app
 
 #http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable//jenkins.war
 RUN wget -O jenkins.war http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/$JENKINS_VERSION/jenkins.war \
-    && wget https://github.com/aktau/github-release/releases/download/$GITHUB_RELEASE_VERSION/linux-amd64-github-release.tar.bz2 \
-    && tar xf linux-amd64-github-release.tar.bz2 && rm -f linux-amd64-github-release.tar.bz2
+    && wget -O hub.tar.gz https://github.com/github/hub/releases/download/v$GITHUB_VERSION/hub-linux-amd64-$GITHUB_VERSION.tgz \
+    && tar xfz hub.tar.gz && rm -f hub.tar.gz \
+    && hub-linux-amd64-$GITHUB_VERSION/install \
+    && rm -rf hub-linux-amd64-$GITHUB_VERSION/
+
 
 
 ENV JENKINS_HOME=/var/jenkins_home
