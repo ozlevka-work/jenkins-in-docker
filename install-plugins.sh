@@ -6,14 +6,16 @@
 # RUN install-plugins.sh docker-slaves github-branch-source
 
 set -o pipefail
+set -x
 
 REF_DIR=${REF:-/usr/share/jenkins/ref/plugins}
 FAILED="$REF_DIR/failed-plugins.txt"
 
 if [ -f "$JENKINS_HOME/plugins" ]; then
-    exit(0)
+    exit 0
 fi
 
+echo "$JENKINS_HOME"
 . /usr/local/bin/jenkins-support
 
 getLockFile() {
@@ -212,6 +214,7 @@ main() {
 
     # Check if there's a version-specific update center, which is the case for LTS versions
     jenkinsVersion="$(jenkinsMajorMinorVersion)"
+    echo "$jenkinsVersion"
     if curl -fsL -o /dev/null "$JENKINS_UC/$jenkinsVersion"; then
         JENKINS_UC_LATEST="$JENKINS_UC/$jenkinsVersion"
         echo "Using version-specific update center: $JENKINS_UC_LATEST..."
@@ -246,7 +249,7 @@ main() {
 
     echo "Cleaning up locks"
     rm -r "$REF_DIR"/*.lock
-    touch "$JENKINS_HOME/plugins"
+    #touch "$JENKINS_HOME/plugins"
 }
 
 main "$@"
