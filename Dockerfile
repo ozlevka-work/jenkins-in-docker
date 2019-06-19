@@ -18,7 +18,7 @@ WORKDIR /app
 
 #http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable//jenkins.war
 RUN mkdir -p /usr/share/jenkins \
-    && wget -O /usr/share/jenkins/jenkins.war http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/$JENKINS_VERSION/jenkins.war \
+    && wget -O /usr/share/jenkins/jenkins.war $JENKINS_UC/download/war/$JENKINS_VERSION/jenkins.war \
     && wget -O hub.tar.gz https://github.com/github/hub/releases/download/v$GITHUB_VERSION/hub-linux-amd64-$GITHUB_VERSION.tgz \
     && tar xfz hub.tar.gz && rm -f hub.tar.gz \
     && hub-linux-amd64-$GITHUB_VERSION/install \
@@ -32,7 +32,7 @@ RUN mkdir -p /usr/share/jenkins \
 
 
 ENV JENKINS_HOME=/var/jenkins_home
-ENV JAVA_OPTS='"-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dmail.smtp.starttls.enable=true"'
+ENV JAVA_OPTS='"-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dpermissive-script-security.enabled=true", "-Dmail.smtp.starttls.enable=true"'
 ENV JENKINS_HOME="/var/jenkins_home"
 ENV COPY_REFERENCE_FILE_LOG="/var/jenkins_home/jenkins.log"
 COPY jenkins.sh /usr/local/bin/jenkins.sh
@@ -52,5 +52,6 @@ RUN /usr/local/bin/install-plugins.sh \
     ssh-agent:1.17 \
     ws-cleanup:0.37 \
     ssh-steps:1.2.1 \
-    htmlpublisher:1.18
+    htmlpublisher:1.18 \
+    permissive-script-security:0.5 
 ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/jenkins.sh"]

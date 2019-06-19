@@ -12,7 +12,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
   # read JAVA_OPTS and JENKINS_OPTS into arrays to avoid need for eval (and associated vulnerabilities)
   java_opts_array=()
   while IFS= read -r -d '' item; do
-    java_opts_array+=( "$item" )
+    java_opts_array+=( "${item/,/}" )
   done < <([[ $JAVA_OPTS ]] && xargs printf '%s\0' <<<"$JAVA_OPTS")
 
   readonly agent_port_property='jenkins.model.Jenkins.slaveAgentPort'
@@ -32,7 +32,10 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
     jenkins_opts_array+=( "$item" )
   done < <([[ $JENKINS_OPTS ]] && xargs printf '%s\0' <<<"$JENKINS_OPTS")
 
+  echo "This is options ${java_opts_array[@]}" >> /var/jenkins_home/jenkins.log
+  
   exec java -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
+  #exec java -Duser.home="$JENKINS_HOME" -Dhudson.model.DirectoryBrowserSupport.CSP= -Dpermissive-script-security.enabled=true -Dmail.smtp.starttls.enable=true -jar ${JENKINS_WAR}
 fi
 
 # As argument is not jenkins, assume user want to run his own process, for example a `bash` shell to explore this image
