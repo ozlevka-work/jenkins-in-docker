@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk
  
-ENV JENKINS_VERSION=2.164.3
+ENV JENKINS_VERSION=2.176.1
 ENV GITHUB_VERSION="2.11.2"
 ENV HELM_VERSION="v2.13.1"
 ENV KUBECTL_VERSION="v1.13.5"
@@ -53,5 +53,6 @@ RUN /usr/local/bin/install-plugins.sh \
     ws-cleanup:0.37 \
     ssh-steps:1.2.1 \
     htmlpublisher:1.18 \
-    permissive-script-security:0.5 
+    permissive-script-security:0.5 \
+    kubernetes:1.17.3
 ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/jenkins.sh"]
