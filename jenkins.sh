@@ -34,7 +34,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
 
   echo "This is options ${java_opts_array[@]}" >> /var/jenkins_home/jenkins.log
   
-  exec java -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
+  exec java -Duser.home="$JENKINS_HOME" -Dhudson.model.DirectoryBrowserSupport.CSP= -Dpermissive-script-security.enabled=true -Dmail.smtp.starttls.enable=true "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
   #exec java -Duser.home="$JENKINS_HOME" -Dhudson.model.DirectoryBrowserSupport.CSP= -Dpermissive-script-security.enabled=true -Dmail.smtp.starttls.enable=true -jar ${JENKINS_WAR}
 fi
 

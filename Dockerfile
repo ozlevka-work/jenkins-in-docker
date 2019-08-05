@@ -54,5 +54,6 @@ RUN /usr/local/bin/install-plugins.sh \
     ssh-steps:1.2.1 \
     htmlpublisher:1.18 \
     permissive-script-security:0.5 \
-    kubernetes:1.17.3
+    kubernetes:1.17.3 \
+    pipeline-utility-steps:2.3.0
 ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/jenkins.sh"]
