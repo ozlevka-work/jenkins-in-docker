@@ -1,22 +1,24 @@
-FROM openjdk:8-jdk
+FROM rappdw/docker-java-python
  
-ENV JENKINS_VERSION=2.176.1
+ENV JENKINS_VERSION=2.190.2
 ENV GITHUB_VERSION="2.11.2"
-ENV HELM_VERSION="v2.13.1"
-ENV KUBECTL_VERSION="v1.13.5"
+ENV HELM_VERSION="v2.16.0"
+ENV KUBECTL_VERSION="v1.16.2"
 ENV JENKINS_UC="https://updates.jenkins.io"
 
 RUN apt-get update \
     && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
     && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
-    && apt-get install -y nodejs gettext-base \
+    && apt-get install -y nodejs npm gettext-base \
     && npm install -g n \
     && n 8.9.1 
+
+RUN pip install ansible==2.9.0
 
 
 WORKDIR /app
 
-#http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable//jenkins.war
+#http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable/jenkins.war
 RUN mkdir -p /usr/share/jenkins \
     && wget -O /usr/share/jenkins/jenkins.war $JENKINS_UC/download/war/$JENKINS_VERSION/jenkins.war \
     && wget -O hub.tar.gz https://github.com/github/hub/releases/download/v$GITHUB_VERSION/hub-linux-amd64-$GITHUB_VERSION.tgz \

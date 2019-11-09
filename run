@@ -4,10 +4,11 @@
 
 docker run \
 	--rm \
-	--name myjenkins \
+	--name jenkins \
 	-p 8080:8080 \
 	-p 5000:5000 \
 	-v /home/ozlevka/tmp/jenkins-home:/var/jenkins_home \
+<<<<<<< HEAD
 	-e "GITHUB_TOKEN=" \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(which docker):/usr/bin/docker \
@@ -15,4 +16,15 @@ docker run \
 	--privileged=true \
 	ozlevka/jenkins:latest
 	#ozlevka/jenkins:190206-15.40
+=======
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v $(which docker):/usr/bin/docker \
+	-v /home/ozlevka/projects/playbooks:/playbooks \
+	-v /home/ozlevka/projects/playbooks/ansible.cfg:/etc/ansible/ansible.cfg \
+	-v /home/ozlevka/.aws:/root/.aws \
+	-v /home/ozlevka/mydocs/levsconnect.pem:/playbooks/levsconnect.pem \
+	--privileged=true \
+	ozlevka/jenkins-ansible:latest
+# latest 181107-17.08
+>>>>>>> ansible
 
