@@ -1,8 +1,8 @@
-FROM rappdw/docker-java-python
+FROM rappdw/docker-java-python:openjdk1.8.0_171-python3.6.6
  
 ENV JENKINS_VERSION=2.190.2
 ENV GITHUB_VERSION="2.11.2"
-ENV HELM_VERSION="v2.16.0"
+ENV HELM_VERSION="v2.14.0"
 ENV KUBECTL_VERSION="v1.16.2"
 ENV JENKINS_UC="https://updates.jenkins.io"
 
@@ -43,7 +43,7 @@ COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 RUN /usr/local/bin/install-plugins.sh \
     dashboard-view:2.10 \
     pipeline-stage-view:2.11 \  
-    parameterized-trigger:2.35.2 \  
+    parameterized-trigger:2.35.2 \
     #bitbucket:1.1.5 \  
     git:3.10.0 \  
     github:1.29.4 \
@@ -56,6 +56,6 @@ RUN /usr/local/bin/install-plugins.sh \
     ssh-steps:1.2.1 \
     htmlpublisher:1.18 \
     permissive-script-security:0.5 \
-    kubernetes:1.17.3 \
+    kubernetes:1.21.3 \
     email-ext:2.66
 ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/jenkins.sh"]
