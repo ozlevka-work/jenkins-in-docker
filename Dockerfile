@@ -1,36 +1,19 @@
 FROM rappdw/docker-java-python
  
-ENV JENKINS_VERSION=2.190.2
-ENV GITHUB_VERSION="2.11.2"
-ENV HELM_VERSION="v2.16.0"
-ENV KUBECTL_VERSION="v1.16.2"
+ENV JENKINS_VERSION=2.222
 ENV JENKINS_UC="https://updates.jenkins.io"
 
 RUN apt-get update \
-    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime \
-    && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
-    && apt-get install -y nodejs npm gettext-base \
-    && npm install -g n \
-    && n 8.9.1 
-
-RUN pip install ansible==2.9.0
+    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime salt-master \
+    && python3 -m pip --disable-pip-version-check install wheel \
+    && python3 -m pip --disable-pip-version-check install salt docker
 
 
 WORKDIR /app
 
 #http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war-stable/jenkins.war
 RUN mkdir -p /usr/share/jenkins \
-    && wget -O /usr/share/jenkins/jenkins.war $JENKINS_UC/download/war/$JENKINS_VERSION/jenkins.war \
-    && wget -O hub.tar.gz https://github.com/github/hub/releases/download/v$GITHUB_VERSION/hub-linux-amd64-$GITHUB_VERSION.tgz \
-    && tar xfz hub.tar.gz && rm -f hub.tar.gz \
-    && hub-linux-amd64-$GITHUB_VERSION/install \
-    && rm -rf hub-linux-amd64-$GITHUB_VERSION/ \
-    && wget -O /app/helm.tar.gz "https://storage.googleapis.com/kubernetes-helm/helm-$HELM_VERSION-linux-amd64.tar.gz" \
-    && tar xfzv helm.tar.gz && mv /app/linux-amd64/helm /usr/local/bin && rm -rf helm.tar.gz linux-amd64 \
-    && helm init -c && helm plugin install https://github.com/chartmuseum/helm-push \
-    && wget -O /app/kubectl "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
-    && chmod +x /app/kubectl \
-    && mv /app/kubectl /usr/local/bin/kubectl
+    && wget -O /usr/share/jenkins/jenkins.war $JENKINS_UC/download/war/$JENKINS_VERSION/jenkins.war 
 
 
 ENV JENKINS_HOME=/var/jenkins_home
@@ -57,5 +40,6 @@ RUN /usr/local/bin/install-plugins.sh \
     htmlpublisher:1.18 \
     permissive-script-security:0.5 \
     kubernetes:1.17.3 \
-    email-ext:2.66
-ENTRYPOINT ["/bin/bash", "-c", "/usr/local/bin/jenkins.sh"]
+    email-ext:2.66 \
+    saltstack:3.2.2
+ENTRYPOINT ["/bin/bash", "-c", "salt-master -d && /usr/local/bin/jenkins.sh"]
