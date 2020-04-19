@@ -28,7 +28,9 @@ RUN mkdir -p /usr/share/jenkins \
     && helm init -c && helm plugin install https://github.com/chartmuseum/helm-push \
     && wget -O /app/kubectl "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
     && chmod +x /app/kubectl \
-    && mv /app/kubectl /usr/local/bin/kubectl
+    && mv /app/kubectl /usr/local/bin/kubectl \
+    # Install awscli for using by kubectl into EC2 node
+    && pip --disable-pip-version-check --no-cache-dir install awscli
 
 
 ENV JAVA_OPTS='"-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dpermissive-script-security.enabled=true", "-Dmail.smtp.starttls.enable=true"'
