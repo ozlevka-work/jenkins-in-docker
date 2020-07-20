@@ -16,9 +16,9 @@ RUN mkdir -p /usr/share/jenkins \
     && wget -O hub.tar.gz https://github.com/github/hub/releases/download/v$GITHUB_VERSION/hub-linux-amd64-$GITHUB_VERSION.tgz \
     && tar xfz hub.tar.gz && rm -f hub.tar.gz \
     && hub-linux-amd64-$GITHUB_VERSION/install \
-    && rm -rf hub-linux-amd64-$GITHUB_VERSION/ 
+    && rm -rf hub-linux-amd64-$GITHUB_VERSION/ \
+    && mkdir -p /usr/share/jenkins/ref/
 
-ENV JENKINS_HOME=/var/jenkins_home
 ENV JAVA_OPTS='"-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dpermissive-script-security.enabled=true", "-Dmail.smtp.starttls.enable=true"'
 ENV JENKINS_HOME="/var/jenkins_home"
 ENV COPY_REFERENCE_FILE_LOG="/var/jenkins_home/jenkins.log"
