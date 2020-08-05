@@ -2,8 +2,6 @@ FROM rappdw/docker-java-python
  
 ENV JENKINS_VERSION=2.204.2
 ENV GITHUB_VERSION="2.11.2"
-ENV HELM_VERSION="v2.16.0"
-ENV KUBECTL_VERSION="v1.14.6"
 ENV JENKINS_UC="https://updates.jenkins.io"
 
 RUN apt-get update \
@@ -23,12 +21,6 @@ RUN mkdir -p /usr/share/jenkins \
     && tar xfz hub.tar.gz && rm -f hub.tar.gz \
     && hub-linux-amd64-$GITHUB_VERSION/install \
     && rm -rf hub-linux-amd64-$GITHUB_VERSION/ \
-    && wget -O /app/helm.tar.gz "https://storage.googleapis.com/kubernetes-helm/helm-$HELM_VERSION-linux-amd64.tar.gz" \
-    && tar xfzv helm.tar.gz && mv /app/linux-amd64/helm /usr/local/bin && rm -rf helm.tar.gz linux-amd64 \
-    && helm init -c && helm plugin install https://github.com/chartmuseum/helm-push \
-    && wget -O /app/kubectl "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" \
-    && chmod +x /app/kubectl \
-    && mv /app/kubectl /usr/local/bin/kubectl \
     # Install awscli for using by kubectl into EC2 node
     && pip --disable-pip-version-check --no-cache-dir install awscli
 
