@@ -1,6 +1,6 @@
 FROM ozlevka/java-8-jdk-python-3-6:1
  
-ENV JENKINS_VERSION=2.204.2
+ENV JENKINS_VERSION=2.249.3
 ENV GITHUB_VERSION="2.11.2"
 ENV JENKINS_UC="https://updates.jenkins.io"
 
@@ -21,8 +21,9 @@ RUN mkdir -p /usr/share/jenkins \
     && tar xfz hub.tar.gz && rm -f hub.tar.gz \
     && hub-linux-amd64-$GITHUB_VERSION/install \
     && rm -rf hub-linux-amd64-$GITHUB_VERSION/ \
+    && mkdir -p /usr/share/jenkins/ref/ \
     # Install awscli for using by kubectl into EC2 node
-    && pip --disable-pip-version-check --no-cache-dir install awscli
+    && pip --disable-pip-version-check --no-cache-dir install awscli python-jenkins
 
 
 ENV JAVA_OPTS='"-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dpermissive-script-security.enabled=true", "-Dmail.smtp.starttls.enable=true"'

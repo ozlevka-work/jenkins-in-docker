@@ -13,6 +13,7 @@ docker run \
 	-v $HOME/.aws:/root/.aws \
 	-v $HOME/.kube:/root/.kube \
 	--privileged=true \
-	jenkins:latest
+	 724428538127.dkr.ecr.us-east-1.amazonaws.com/jenkins-master:2.249.3
+#jenkins:latest
 # latest 181107-17.08
 
