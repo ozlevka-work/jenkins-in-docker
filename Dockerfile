@@ -1,6 +1,6 @@
 FROM rappdw/docker-java-python
  
-ENV JENKINS_VERSION=2.245
+ENV JENKINS_VERSION=2.263.3
 ENV GITHUB_VERSION="2.11.2"
 ENV JENKINS_UC="https://updates.jenkins.io"
 

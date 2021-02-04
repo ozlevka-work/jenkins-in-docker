@@ -7,9 +7,9 @@ docker run -d \
 	--name jenkins \
 	-p 8080:8080 \
 	-p 5000:5000 \
-	-v /jenkins:/var/jenkins_home \
+	-v $HONE/tmp/jenkins-home:/var/jenkins_home \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(which docker):/usr/bin/docker \
 	--privileged=true \
-	ozlevka/jenkins:200717-16.35
+	ghcr.io/ozlevka-work/jenkins:v0.0.1
 
