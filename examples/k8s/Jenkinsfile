@@ -1,5 +1,5 @@
 
-podTemplate {
+podTemplate (
     yaml: '''
 apiVersion: v1
 kind: Pod
@@ -14,7 +14,7 @@ spec:
     - name: second-code
       image: centos:8
       command: ["/bin/bash", "-c", "while sleep 1000; do :; done"]
-    '''
+    ''') {
 
     node(POD_LABEL) {
         stage("Test first") {
