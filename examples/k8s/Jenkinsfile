@@ -1,0 +1,31 @@
+
+podTemplate {
+    yaml: '''
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubernetes-jenkins-slave
+spec:
+  containers:
+    - name: first-code
+      image: ubuntu:18.04
+      command: ["/bin/bash", "-c", "while sleep 1000; do :; done"]
+    - name: second-code
+      image: centos:8
+      command: ["/bin/bash", "-c", "while sleep 1000; do :; done"]
+    '''
+
+    node(POD_LABEL) {
+        stage("Test first") {
+            container("first-code") {
+                sh 'apt-get update'
+            }
+        }
+
+        stage('Test Second') {
+            container('second-code') {
+                sh 'yum -y update'
+            }
+        }
+    }
+}
