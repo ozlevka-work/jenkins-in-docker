@@ -2,4 +2,8 @@ node {
     stage("Hello stage") {
         echo "Hello first git based pipeline"
     }
+
+    stage("The change") {
+        sh 'echo "Hello second stage"' 
+    }
 }
