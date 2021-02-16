@@ -8,9 +8,6 @@ docker run -d \
 	-p 8080:8080 \
 	-p 5000:5000 \
 	-v $HOME/tmp/jenkins-home:/var/jenkins_home \
-	-v /var/run/docker.sock:/var/run/docker.sock \
-	-v $HOME/.kube:/root/.kube \
-	-v $(which docker):/usr/bin/docker \
 	--privileged=true \
-	ghcr.io/ozlevka-work/jenkins:v0.0.1
+	test-jenkins:latest
 

@@ -1,11 +1,12 @@
-FROM rappdw/docker-java-python
+FROM openjdk:8-jdk
  
-ENV JENKINS_VERSION=2.263.3
+ENV JENKINS_VERSION=2.204.1
 ENV GITHUB_VERSION="2.11.2"
 ENV JENKINS_UC="https://updates.jenkins.io"
 
 RUN apt-get update \
-    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime 
+    && apt-get install -y sudo make wget curl libltdl7 uuid-runtime python python-pip \
+    && pip install python-jenkins==1.4.0
 
 
 WORKDIR /app
