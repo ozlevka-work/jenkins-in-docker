@@ -1,6 +1,6 @@
 FROM rappdw/docker-java-python
  
-ENV JENKINS_VERSION=2.263.3
+ENV JENKINS_VERSION=2.303.1
 ENV GITHUB_VERSION="2.11.2"
 ENV JENKINS_UC="https://updates.jenkins.io"
 
@@ -17,7 +17,8 @@ RUN mkdir -p /usr/share/jenkins \
     && tar xfz hub.tar.gz && rm -f hub.tar.gz \
     && hub-linux-amd64-$GITHUB_VERSION/install \
     && rm -rf hub-linux-amd64-$GITHUB_VERSION/ \
-    && mkdir -p /usr/share/jenkins/ref/
+    && mkdir -p /usr/share/jenkins/ref / \
+    && pip install awscli
 
 ENV JAVA_OPTS='"-Dhudson.model.DirectoryBrowserSupport.CSP=", "-Dpermissive-script-security.enabled=true", "-Dmail.smtp.starttls.enable=true"'
 ENV JENKINS_HOME="/var/jenkins_home"
